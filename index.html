@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little World Made for You ♡</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #F8C8DC;
+            --blue: #BDE0FE;
+            --cream: #FFF5F8;
+            --dark: #62536B;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* OPENING */
+
+        .opening {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #F8C8DC, #BDE0FE);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+            transition: opacity 1s, visibility 1s;
+        }
+
+        .opening.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .opening h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .opening p {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .open-btn {
+            border: none;
+            background: white;
+            color: #D77DA6;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.08);
+        }
+
+        /* MUSIC BUTTON */
+
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            color: #D77DA6;
+            font-size: 21px;
+            box-shadow: 0 5px 20px #d7a9c455;
+            cursor: pointer;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #F8C8DC,
+                #DCCDF9,
+                #BDE0FE
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+
+        .hero .subtitle {
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: white;
+            line-height: 1.15;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #fff;
+            margin-top: 15px;
+        }
+
+        .hero p {
+            color: white;
+            margin-top: 25px;
+            max-width: 450px;
+            line-height: 1.8;
+        }
+
+        .scroll {
+            position: absolute;
+            bottom: 35px;
+            color: white;
+            font-size: 12px;
+            letter-spacing: 2px;
+            animation: float 2s infinite;
+        }
+
+        /* GENERAL SECTION */
+
+        section {
+            padding: 100px 25px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .section-label {
+            color: #D77DA6;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 25px;
+        }
+
+        .description {
+            line-height: 2;
+            max-width: 650px;
+            margin: auto;
+            color: #81758A;
+        }
+
+        /* STORY */
+
+        .story {
+            background: var(--cream);
+        }
+
+        .story-card {
+            background: white;
+            padding: 45px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px #d8b4c522;
+            margin-top: 40px;
+            line-height: 2;
+            text-align: left;
+        }
+
+        .story-card p {
+            margin-bottom: 18px;
+        }
+
+        /* GALLERY */
+
+        .gallery {
+            background: linear-gradient(180deg, #FFF5F8, #EAF5FF);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .photo {
+            background: white;
+            padding: 12px 12px 35px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px #8b9fba22;
+            transform: rotate(-2deg);
+            transition: .3s;
+        }
+
+        .photo:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+        .photo:hover {
+            transform: translateY(-10px) rotate(0);
+        }
+
+        .photo img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .photo p {
+            margin-top: 12px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* LOVE LETTER */
+
+        .letter {
+            background: linear-gradient(135deg, #E8F4FF, #FCE3EF);
+        }
+
+        .letter-box {
+            background: white;
+            max-width: 650px;
+            margin: 40px auto 0;
+            padding: 45px 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px #b4c6dc33;
+        }
+
+        .letter-content {
+            display: none;
+            text-align: left;
+            line-height: 2;
+            margin-top: 30px;
+        }
+
+        .letter-content.show {
+            display: block;
+            animation: appear 1s;
+        }
+
+        .letter-btn {
+            border: none;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #F8C8DC, #BDE0FE);
+            color: #62536B;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #DCCDF9;
+            padding: 70px 25px;
+            text-align: center;
+            color: white;
+        }
+
+        footer h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* ANIMATION */
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            color: white;
+            opacity: .6;
+            pointer-events: none;
+            animation: rise 7s linear forwards;
+            z-index: 2;
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media(max-width: 650px) {
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .story-card {
+                padding: 25px;
+            }
+
+            section {
+                padding: 75px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND MUSIC -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- OPENING SCREEN -->
+    <div class="opening" id="opening">
+        <h1>For You ♡</h1>
+        <p>Someone special deserves something special.</p>
+        <button class="open-btn" onclick="startWebsite()">
+            Open Your Surprise ♡
+        </button>
+    </div>
+
+    <!-- MUSIC CONTROL -->
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+        ♫
+    </button>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="subtitle">A SPECIAL DAY FOR SOMEONE SPECIAL</div>
+
+        <h1>Happy Birthday</h1>
+        <h2>My Favorite Person ♡</h2>
+
+        <p>
+            Today is all about you.
+            A little website, a little story,
+            and a whole lot of appreciation for your existence.
+        </p>
+
+        <div class="scroll">SCROLL TO EXPLORE ↓</div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story">
+        <div class="container">
+
+            <div class="section-label">A LITTLE STORY</div>
+            <h2 class="section-title">Why You Mean So Much to Me</h2>
+
+            <p class="description">
+                Sometimes, words are not enough to explain
+                how much someone means to us.
+                But today, I want to try.
+            </p>
+
+            <div class="story-card">
+
+                <p>
+                    I don't know if I have ever told you this enough,
+                    but I am genuinely grateful that you exist
+                    and became a part of my life.
+                </p>
+
+                <p>
+                    You bring happiness into ordinary days.
+                    Even the simplest conversations and little moments
+                    with you can become memories I treasure.
+                </p>
+
+                <p>
+                    Thank you for being yourself.
+                    Thank you for every laugh, every conversation,
+                    and every little thing that makes our story special.
+                </p>
+
+                <p>
+                    I hope you know that you are appreciated,
+                    not only today, but every single day.
+                </p>
+
+                <p>
+                    <strong>
+                        I'm really lucky to have you in my life. ♡
+                    </strong>
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery">
+        <div class="container">
+
+            <div class="section-label">LITTLE MEMORIES</div>
+            <h2 class="section-title">Our Favorite Moments</h2>
+
+            <p class="description">
+                A collection of little moments
+                that deserve to be remembered.
+            </p>
+
+            <div class="photo-grid">
+
+                <div class="photo">
+                    <img src="photo1.jpg" alt="Our memory">
+                    <p>One of my favorites ♡</p>
+                </div>
+
+                <div class="photo">
+                    <img src="photo2.jpg" alt="Our memory">
+                    <p>Beautiful memories</p>
+                </div>
+
+                <div class="photo">
+                    <img src="photo3.jpg" alt="Our memory">
+                    <p>Just us ♡</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section class="letter">
+        <div class="container">
+
+            <div class="section-label">A LETTER FOR YOU</div>
+            <h2 class="section-title">Something I Want You to Know</h2>
+
+            <div class="letter-box">
+
+                <h3 style="font-family: 'Playfair Display';">
+                    Dear, My Favorite Person ♡
+                </h3>
+
+                <p style="margin: 20px 0;">
+                    There is something I have been wanting to tell you...
+                </p>
+
+                <button class="letter-btn" onclick="openLetter()">
+                    Open My Letter 💌
+                </button>
+
+                <div class="letter-content" id="letterContent">
+
+                    <p>
+                        Happy birthday, my favorite person.
+                    </p>
+
+                    <p>
+                        I hope this new chapter of your life brings
+                        you countless reasons to smile, opportunities
+                        to grow, and beautiful experiences to remember.
+                    </p>
+
+                    <p>
+                        I wish I could remind you every day how wonderful
+                        you are and how much your presence means to me.
+                    </p>
+
+                    <p>
+                        Whatever the future holds, I hope you never
+                        forget how special you are.
+                    </p>
+
+                    <p>
+                        Thank you for being part of my story.
+                        Here's to more memories, more laughter,
+                        and more beautiful days ahead.
+                    </p>
+
+                    <p>
+                        With all my appreciation,<br>
+                        <strong>Someone who is grateful for you. ♡</strong>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>Once Again, Happy Birthday ♡</h2>
+
+        <p>
+            The world became a little more beautiful
+            because you are in it.
+        </p>
+
+        <p style="margin-top: 30px; font-size: 12px;">
+            Made with love, just for you ♡
+        </p>
+    </footer>
+
+    <script>
+
+        const music = document.getElementById("bgMusic");
+
+        // OPEN WEBSITE
+        function startWebsite() {
+            music.play().catch(error => {
+                console.log("Music playback unavailable:", error);
+            });
+
+            document.getElementById("opening")
+                .classList.add("hide");
+        }
+
+        // MUSIC CONTROL
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                document.getElementById("musicBtn").innerHTML = "♫";
+            } else {
+                music.pause();
+                document.getElementById("musicBtn").innerHTML = "♪";
+            }
+        }
+
+        // OPEN LETTER
+        function openLetter() {
+            const letter = document.getElementById("letterContent");
+
+            letter.classList.toggle("show");
+        }
+
+        // FLOATING HEARTS
+        function createHeart() {
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+            heart.innerHTML = "♡";
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        setInterval(createHeart, 1000);
+
+    </script>
+
+</body>
+</html>
